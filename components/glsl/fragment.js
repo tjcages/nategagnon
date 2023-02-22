@@ -29,7 +29,7 @@ void main(){
 			vec2 pos = fC/resolution.xy;
 
 			pos.y /= resolution.x/resolution.y;
-			pos = 4.0*(vec2(0.5) - pos);
+			pos = 2.0*(vec2(0.5) - pos);
 
 			for(float k = 1.0; k < 7.0; k+=1.0){ 
 				pos.x += strength * sin(2.0*t+k*1.5 * pos.y)+t*0.5;
@@ -37,7 +37,7 @@ void main(){
 			}
 
 			//Time varying pixel colour
-			col += 0.5 + 0.5 * cos(time + pos.xyx + vec3(0, 2, 2));
+			col += 0. + 0.3 * cos(time + pos.xyx + vec3(0, 2, 2));
 
 			#ifdef AA
 		}
