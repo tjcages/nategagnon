@@ -1,10 +1,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import styles, {
-  animationDuration,
-  animationDelay,
-} from "@/styles/intro.module.scss";
+import styles from "@/styles/intro.module.scss";
 
 function _() {
   return (
@@ -14,8 +11,8 @@ function _() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{
-          duration: parseFloat(animationDuration.replace("s", "")),
-          delay: parseFloat(animationDelay.replace("s", "")),
+          duration: 0.5,
+          delay: 0.25,
           ease: "easeOut",
         }}
       >
@@ -31,8 +28,8 @@ function _() {
             initial={{ y: "100%" }}
             animate={{ y: "0%" }}
             transition={{
-              duration: parseFloat(animationDuration.replace("s", "")),
-              delay: parseFloat(animationDelay.replace("s", "")) * 2,
+              duration: 0.5,
+              delay: 0.5,
               ease: "easeOut",
             }}
           >
