@@ -37,7 +37,7 @@ void main(){
 			}
 
 			//Time varying pixel colour
-			col += 0.2 + 0.5 * cos(time + pos.xyx + vec3(0, 2, 2));
+			col += 0.1 + 0.5 * cos(time + pos.xyx + vec3(0, 2, 2));
 
 			#ifdef AA
 		}

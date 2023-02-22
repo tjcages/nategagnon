@@ -163,7 +163,7 @@ function _({ blur }: Props) {
   function draw() {
     //Update time
     thisFrame = Date.now();
-    time += (thisFrame - lastFrame) / 1770;
+    time += (thisFrame - lastFrame) / 5770;
     lastFrame = thisFrame;
 
     if (gl) {
