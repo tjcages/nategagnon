@@ -17,7 +17,7 @@ function _() {
         }}
       >
         <Image
-          src="/img/cursor.png"
+          src="/img/logo.png"
           alt="cursor"
           width={64}
           height={64}
