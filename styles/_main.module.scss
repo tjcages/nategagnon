@@ -1,0 +1,103 @@
+@import "./_variables";
+
+.main {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* height: 100vh; */
+  width: 100vw;
+  /* overflow: auto; */
+
+  color: $color_100;
+  background: $color_800;
+
+  h1 {
+    font-size: $font-size-600;
+    font-weight: $font_weight_300;
+    text-align: center;
+
+    color: $color_100;
+    text-shadow: $color_700 0px 4px 6px, $color_800 0px -3px 5px;
+  }
+
+  h2 {
+    font-size: $font-size-500;
+    font-weight: $font_weight_300;
+
+    color: $color_100;
+    text-shadow: $color_700 0px 4px 6px, $color_800 0px -3px 5px;
+  }
+
+  h3 {
+    font-size: $font-size-400;
+    font-weight: $font_weight_300;
+
+    color: $color_100;
+    text-shadow: $color_700 0px 4px 6px, $color_800 0px -3px 5px;
+  }
+
+  h4 {
+    font-size: $font-size-300;
+    font-weight: $font_weight_200;
+
+    color: $color_200;
+    text-shadow: $color_700 0px 4px 6px, $color_800 0px -3px 5px;
+  }
+
+  h5 {
+    font-size: $font-size-200;
+    font-weight: $font_weight_200;
+    line-height: 1.2em;
+
+    color: $color_100;
+
+    overflow: hidden;
+  }
+
+  p {
+    font-size: $font-size-100;
+    font-weight: $font_weight_100;
+
+    color: $color_400;
+  }
+
+  em {
+    font-size: $font-size-050;
+    font-weight: $font_weight_100;
+    font-style: normal;
+
+    color: $color_400;
+  }
+
+  strong {
+    padding: $padding-100/2 $padding-100;
+
+    font-size: 14px !important;
+    font-weight: $font_weight_100;
+
+    flex-wrap: nowrap;
+    white-space: nowrap;
+
+    color: $color_400 !important;
+    border: $border-standard;
+    border-radius: $padding-400;
+  }
+
+  input {
+    font-size: $font-size-100;
+    font-weight: $font_weight_100;
+
+    color: $color_300;
+  }
+
+  strong {
+    font-size: $font-size-100;
+    font-weight: $font_weight_100;
+
+    color: $color_300;
+  }
+}

@@ -1,0 +1,88 @@
+@import "./_variables";
+
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem;
+
+  perspective: 100px;
+  perspective-origin: 50% 50%;
+}
+
+.center {
+  position: relative;
+
+  padding: 2px;
+  width: 70vw;
+  height: 60vh;
+
+  background: rgba(255, 255, 255, 0.175);
+  border-radius: $border-radius-400;
+  box-shadow: rgba(255, 255, 255, 0.5) 0px 1px 1px 0px inset,
+    rgba(133, 133, 199, 0.25) 0px 50px 100px -20px,
+    rgba(255, 255, 255, 0.1) 0px 30px 60px -60px,
+    rgba(50, 50, 93, 0.25) 0px -30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px -18px 36px -18px inset;
+
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) translate(0, 0);
+
+  animation: $animation-duration-long $animation-easing 0s 1 animateIn;
+  transition: padding $animation-duration-long $animation-easing,
+    box-shadow $animation-duration-long $animation-easing,
+    background-color $animation-duration $animation-easing,
+    transform $animation-duration $animation-easing;
+
+  cursor: pointer;
+
+  &:hover {
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: rgba(255, 255, 255, 0.6) 0px 11px 1px 0px inset,
+      rgba(133, 133, 199, 0.35) 0px 60px 100px -20px,
+      rgba(255, 255, 255, 0.2) 0px 40px 60px -60px,
+      rgba(50, 50, 93, 0.25) 0px -30px 60px -12px inset,
+      rgba(0, 0, 0, 0.3) 0px -18px 36px -18px inset;
+
+    .container {
+      border-width: 3px;
+      transform: scale(0.99);
+    }
+  }
+
+  .container {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    backdrop-filter: blur(4px) brightness(200%);
+
+    border: 2px solid rgba(255, 255, 255, 0.125);
+    border-radius: $border-radius-400;
+
+    overflow: hidden;
+
+    transition: border-width $animation-duration $animation-easing,
+      transform $animation-duration $animation-easing;
+  }
+}
+
+@keyframes animateIn {
+  0% {
+    opacity: 0;
+    transform: rotateX(0.5deg) translate(0, 100px);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(0deg) translate(0, 0px);
+  }
+}
