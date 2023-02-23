@@ -1,63 +1,74 @@
 import Image from "next/image";
 import styles from "../styles/list.module.scss";
 
-const items = [
-  {
-    type: "header",
-    name: "Nate Gagnon",
-    icon: "/img/logo.png",
-  },
-  {},
-  {
-    type: "item",
-    name: "About me",
-    icon: "/img/chevron.png",
-  },
-  {
-    type: "item",
-    name: "Contact/Email",
-    key: "⌘E",
-  },
-  {},
-  {
-    type: "item",
-    name: "OFF––Brand",
-    key: "⌘O",
-  },
-  {
-    type: "item",
-    name: "Leisureboi",
-    key: "⌘L",
-  },
-  {
-    type: "item",
-    name: "Projects",
-    icon: "/img/chevron.png",
-  },
-  {
-    type: "item",
-    name: "Apps",
-    icon: "/img/chevron.png",
-  },
-];
+import { ItemProps } from "../data/list";
 
-function _() {
-  const renderItem = (item: any, index: number) => {
+interface Props {
+  data?: ItemProps[] | null;
+  onHover?: (index: number) => void;
+}
+
+function _({ data, onHover }: Props) {
+  const renderItem = (item: ItemProps, index: number) => {
     switch (item.type) {
-      case "header":
+      case "title":
         return (
-          <div key={index} className={styles.header}>
+          <div
+            key={index}
+            className={styles.header}
+            onMouseEnter={() => {
+              if (onHover) onHover(index);
+            }}
+          >
             <h5>{item.name}</h5>
             {item.icon && (
-              <Image src={item.icon} alt="logo" width={28} height={28} />
+              <Image src={item.icon} alt="logo" width={20} height={20} />
+            )}
+            {item.key && <p>{item.key}</p>}
+          </div>
+        );
+      case "header":
+        return (
+          <div
+            key={index}
+            className={styles.header}
+            onMouseEnter={() => {
+              if (onHover) onHover(index);
+            }}
+          >
+            <h5 className={styles.dim}>{item.name}</h5>
+            {item.icon && (
+              <Image src={item.icon} alt="logo" width={20} height={20} />
             )}
             {item.key && <p>{item.key}</p>}
           </div>
         );
       case "item":
         return (
-          <div key={index} className={styles.item}>
+          <div
+            key={index}
+            className={styles.item}
+            onMouseEnter={() => {
+              if (onHover) onHover(index);
+            }}
+          >
             <h5>{item.name}</h5>
+            {item.icon && (
+              <Image src={item.icon} alt="icon" width={12} height={12} />
+            )}
+            {item.key && <p>{item.key}</p>}
+          </div>
+        );
+      case "upcoming":
+        return (
+          <div
+            key={index}
+            className={styles.item}
+            onMouseEnter={() => {
+              if (onHover) onHover(index);
+            }}
+          >
+            <h5 className={styles.dim}>{item.name}</h5>
             {item.icon && (
               <Image src={item.icon} alt="icon" width={12} height={12} />
             )}
@@ -71,7 +82,7 @@ function _() {
 
   return (
     <div className={styles.main}>
-      {items.map((item, index) => renderItem(item, index))}
+      {data && data.map((item, index) => renderItem(item, index))}
     </div>
   );
 }

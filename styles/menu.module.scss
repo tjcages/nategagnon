@@ -15,7 +15,8 @@
   perspective: 100px;
   perspective-origin: 50% 50%;
 
-  .container {
+  .menu,
+  .submenu {
     position: absolute;
     top: 0;
     left: 0;
