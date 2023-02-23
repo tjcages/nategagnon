@@ -49,7 +49,7 @@
   }
 
   h5 {
-    font-size: $font-size-200;
+    font-size: $font-size-100;
     font-weight: $font_weight_200;
     line-height: 1.2em;
 
@@ -99,5 +99,14 @@
     font-weight: $font_weight_100;
 
     color: $color_300;
+  }
+
+  hr {
+    width: 100%;
+    height: 2px;
+    margin: $padding-100/2 0;
+
+    background-color: $color-500;
+    border: none;
   }
 }

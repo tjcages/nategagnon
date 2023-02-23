@@ -1,0 +1,61 @@
+@import "./_variables";
+
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  perspective: 100px;
+  perspective-origin: 50% 50%;
+
+  .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-stsart;
+
+    width: 224px;
+
+    opacity: 0;
+    transform: scale(0.6) translate(0, 60px) rotateX(-1deg);
+    transform-style: preserve-3d;
+    transform-origin: top left;
+
+    transition: opacity $animation-duration-short $animation-easing,
+      transform $animation-duration-short $animation-easing;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      background-color: $color-700-80;
+      border: $border-standard;
+      border-radius: $border-radius-200;
+      box-shadow: rgba(30, 26, 27, 0.25) 0px 50px 100px -20px,
+        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+        rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+      backdrop-filter: blur(10px);
+    }
+
+    &.visible {
+      opacity: 1;
+      zoom: 1;
+      transform: scale(1) translate(0, 0) rotateX(0);
+    }
+  }
+}

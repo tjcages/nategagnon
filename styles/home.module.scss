@@ -22,17 +22,14 @@
 .center {
   position: relative;
 
-  /* padding: 2px; */
   width: 70vw;
+  min-width: 80vh;
   height: 60vh;
+  min-height: 40vw;
+  aspect-ratio: 1.6 / 1;
 
-  background: rgba(255, 255, 255, 0.175);
+  // background: rgba(255, 255, 255, 0.175);
   border-radius: $border-radius-400;
-  /* box-shadow: rgba(255, 255, 255, 0.5) 0px 1px 1px 0px inset,
-    rgba(133, 133, 199, 0.25) 0px 50px 100px -20px,
-    rgba(255, 255, 255, 0.1) 0px 30px 60px -60px,
-    rgba(50, 50, 93, 0.25) 0px -30px 60px -12px inset,
-    rgba(0, 0, 0, 0.3) 0px -18px 36px -18px inset; */
 
   transform-style: preserve-3d;
   transform: rotateX(0deg) translate(0, 0);
@@ -43,21 +40,6 @@
     background-color $animation-duration $animation-easing,
     transform $animation-duration $animation-easing;
 
-  &:hover {
-    /* padding: 4px; */
-    background: rgba(255, 255, 255, 0.2);
-    /* box-shadow: rgba(255, 255, 255, 0.6) 0px 11px 1px 0px inset,
-      rgba(133, 133, 199, 0.35) 0px 60px 100px -20px,
-      rgba(255, 255, 255, 0.2) 0px 40px 60px -60px,
-      rgba(50, 50, 93, 0.25) 0px -30px 60px -12px inset,
-      rgba(0, 0, 0, 0.3) 0px -18px 36px -18px inset; */
-
-    .container {
-      border-width: 3px;
-      /* transform: scale(0.99); */
-    }
-  }
-
   .container {
     position: relative;
 
@@ -65,8 +47,6 @@
     height: 100%;
 
     backdrop-filter: blur(4px) brightness(200%);
-
-    /* border: 2px solid rgba(255, 255, 255, 0.125); */
     border-radius: $border-radius-400;
 
     overflow: hidden;

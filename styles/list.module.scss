@@ -1,0 +1,43 @@
+@import "./_variables";
+
+.main {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 100%;
+  height: 100%;
+
+  user-select: none;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    padding: $padding-100 $padding-200 $padding-100/2;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+
+    &:hover {
+      background-color: $color-accent;
+
+      p {
+        color: $color-100;
+      }
+    }
+  }
+}
