@@ -17,6 +17,8 @@
     align-items: center;
     gap: 1rem;
 
+    user-select: none;
+
     .header {
       height: 160%;
       overflow: hidden;

@@ -13,6 +13,7 @@ function _({ blur }: Props) {
   var canvas: HTMLCanvasElement;
   var gl: WebGLRenderingContext | null;
   var time = 0.0;
+  var cursor = { x: 0.0, y: 0.0 };
 
   var lastFrame = Date.now();
   var thisFrame;
@@ -20,12 +21,13 @@ function _({ blur }: Props) {
   var timeHandle: WebGLUniformLocation;
   var widthHandle: WebGLUniformLocation;
   var heightHandle: WebGLUniformLocation;
+  var cursorPositionHandle: WebGLUniformLocation;
 
   const ref = useRef() as React.MutableRefObject<HTMLCanvasElement>;
 
   useEffect(() => {
     init();
-  });
+  }, []);
 
   function init() {
     if (ref.current) canvas = ref.current;
@@ -156,6 +158,19 @@ function _({ blur }: Props) {
 
       gl.uniform1f(widthHandle, window.innerWidth);
       gl.uniform1f(heightHandle, window.innerHeight);
+
+      // Set cursor position
+      cursorPositionHandle = gl.getUniformLocation(
+        program,
+        "cursorPosition"
+      ) as WebGLUniformLocation;
+
+      // set position of cursor click
+
+      window.addEventListener("click", (e) => {
+        cursor.x = e.clientX;
+        cursor.y = e.clientY;
+      });
     }
     return null;
   }
@@ -163,7 +178,7 @@ function _({ blur }: Props) {
   function draw() {
     //Update time
     thisFrame = Date.now();
-    time += (thisFrame - lastFrame) / 5770;
+    time += (thisFrame - lastFrame) / 4500;
     lastFrame = thisFrame;
 
     if (gl) {
@@ -171,6 +186,8 @@ function _({ blur }: Props) {
       gl.uniform1f(timeHandle, time);
       //Draw a triangle strip connecting vertices 0-4
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+      gl.uniform2f(cursorPositionHandle, cursor.x, cursor.y);
     }
 
     requestAnimationFrame(draw);

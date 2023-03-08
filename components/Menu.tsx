@@ -6,8 +6,7 @@ import List from "./List";
 import data from "../data/list";
 
 const standardMargin = 24;
-const standardHeight = 48;
-const scale = 1 / 0.6; // starting scale
+const scale = 0.6; // starting scale
 
 function _() {
   const ref = useRef<HTMLDivElement>(null);
@@ -22,39 +21,35 @@ function _() {
 
   const handleMouseDown = (x: number, y: number) => {
     if (ref.current) {
-      const position = handleMenuPosition(ref.current, x, y, standardMargin);
-      if (position) setPosition(position);
+      const clickPosition = handleMenuPosition(
+        ref.current,
+        x,
+        y,
+        standardMargin
+      );
+      if (clickPosition) setPosition(clickPosition);
 
-      if (position && subRef.current) {
-        const subPosition = handleMenuPosition(subRef.current, x, y, 0);
-        const guessHeight = hoveredData
-          ? standardHeight * hoveredData.length - 1
-          : 0;
-
-        // horizontal stack
-        if (
-          subPosition &&
-          position.left + position.adjustedWidth + subPosition.adjustedWidth >
-            window.innerWidth - standardMargin
-        ) {
-          subPosition.left = position.left - subPosition.adjustedWidth;
-        } else if (subPosition) {
-          subPosition.left = position.left + subPosition.adjustedWidth;
+      if (clickPosition && subRef.current) {
+        var subLeft = clickPosition.left;
+        var subTop = clickPosition.top;
+        const subSize = subRef.current.getBoundingClientRect();
+        const right =
+          clickPosition.left +
+          (clickPosition.adjustedWidth + subSize.width) / scale;
+        const top = clickPosition.top + clickPosition.adjustedHeight / scale;
+        if (right >= window.innerWidth - standardMargin) {
+          subLeft -= clickPosition.adjustedWidth + subSize.width * scale;
+        } else {
+          subLeft += clickPosition.adjustedWidth + subSize.width * scale;
+        }
+        if (top >= window.innerHeight - standardMargin) {
+          subTop -= (clickPosition.adjustedHeight - subSize.height);
         }
 
-        // vertical stack
-        // console.log(guessHeight);
-        // if (
-        //   subPosition &&
-        //   position.top + position.adjustedHeight + subPosition.adjustedHeight >=
-        //     window.innerHeight - standardMargin * 2
-        // ) {
-        //   subPosition.top = window.innerHeight - standardMargin - guessHeight;
-        // } else if (subPosition) {
-        //   // subPosition.top = position.top + subPosition.adjustedHeight;
-        // }
-
-        if (subPosition) setSubPosition(subPosition);
+        setSubPosition({
+          left: subLeft,
+          top: subTop,
+        });
       }
     }
   };
@@ -66,8 +61,8 @@ function _() {
     margin: number = standardMargin
   ) => {
     const { left, top, width, height } = element.getBoundingClientRect();
-    var adjustedWidth = width * scale;
-    var adjustedHeight = height * scale;
+    var adjustedWidth = width;
+    var adjustedHeight = height;
 
     const isWithin =
       (x > left && x < left + width && y > top && y < top + height) ||
@@ -97,12 +92,12 @@ function _() {
       newTop = margin;
     }
     // determine if right is outside of window & set to window width if so
-    if (x + adjustedWidth > window.innerWidth - margin) {
-      newLeft = window.innerWidth - adjustedWidth - margin;
+    if (x + adjustedWidth / scale > window.innerWidth - margin) {
+      newLeft = window.innerWidth - adjustedWidth / scale - margin;
     }
     // determine if bottom is outside of window & set to window height if so
-    if (y + adjustedHeight > window.innerHeight - margin) {
-      newTop = window.innerHeight - adjustedHeight - margin * 2;
+    if (y + adjustedHeight / scale > window.innerHeight - margin) {
+      newTop = window.innerHeight - adjustedHeight / scale - margin;
     }
     return {
       left: newLeft,
@@ -111,6 +106,8 @@ function _() {
       adjustedHeight,
     };
   };
+
+  useEffect(() => {}, [hovered]);
 
   return (
     <div
@@ -125,7 +122,11 @@ function _() {
         className={`${styles.menu} ${visible ? styles.visible : ""}`}
         style={{ top: position.top, left: position.left }}
       >
-        <List data={data} onHover={(index: number) => hover(index)} />
+        <List
+          data={data}
+          visible={visible}
+          onHover={(index: number) => hover(index)}
+        />
       </div>
       {/* Sub menu */}
 
@@ -134,7 +135,7 @@ function _() {
         className={`${styles.menu} ${hoveredData ? styles.visible : ""}`}
         style={{ top: subPosition.top, left: subPosition.left }}
       >
-        <List data={hoveredData} />
+        <List visible={visible} data={hoveredData} />
       </div>
     </div>
   );

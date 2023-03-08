@@ -5,10 +5,11 @@ import { ItemProps } from "../data/list";
 
 interface Props {
   data?: ItemProps[] | null;
+  visible?: boolean;
   onHover?: (index: number) => void;
 }
 
-function _({ data, onHover }: Props) {
+function _({ data, visible, onHover }: Props) {
   const renderItem = (item: ItemProps, index: number) => {
     switch (item.type) {
       case "title":
@@ -17,7 +18,7 @@ function _({ data, onHover }: Props) {
             key={index}
             className={styles.header}
             onMouseEnter={() => {
-              if (onHover) onHover(index);
+              if (visible && onHover) onHover(index);
             }}
           >
             <h5>{item.name}</h5>
@@ -33,7 +34,7 @@ function _({ data, onHover }: Props) {
             key={index}
             className={styles.header}
             onMouseEnter={() => {
-              if (onHover) onHover(index);
+              if (visible && onHover) onHover(index);
             }}
           >
             <h5 className={styles.dim}>{item.name}</h5>
@@ -49,7 +50,7 @@ function _({ data, onHover }: Props) {
             key={index}
             className={styles.item}
             onMouseEnter={() => {
-              if (onHover) onHover(index);
+              if (visible && onHover) onHover(index);
             }}
           >
             <h5>{item.name}</h5>
@@ -65,7 +66,7 @@ function _({ data, onHover }: Props) {
             key={index}
             className={styles.item}
             onMouseEnter={() => {
-              if (onHover) onHover(index);
+              if (visible && onHover) onHover(index);
             }}
           >
             <h5 className={styles.dim}>{item.name}</h5>
